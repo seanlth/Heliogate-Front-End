@@ -19,7 +19,7 @@ public class Vaadintest2Application extends Application {
 	}
 	
 	private void buildMainLayout() {
-		setMainWindow(new Window("Address Book Demo application"));
+		setMainWindow(new Window("Heliogate Catalogue Query"));
 		VerticalLayout layout = new VerticalLayout();
 		
 		layout.addComponent(doc);
