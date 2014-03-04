@@ -386,16 +386,18 @@ public class DocEditor extends CustomComponent {
 		APMReadyStateLabel.setImmediate(false);
 		APMReadyStateLabel.setWidth("160px");
 		APMReadyStateLabel.setHeight("26px");
+		APMReadyStateLabel.setValue("Label");
 		top_sean_area.addComponent(APMReadyStateLabel,
 				"top:34.0px;left:400.0px;");
 		
-		// label_1
-		
+		// dateValidStateLabel
 		dateValidStateLabel = new Label();
 		dateValidStateLabel.setImmediate(false);
 		dateValidStateLabel.setWidth("-1px");
 		dateValidStateLabel.setHeight("-1px");
-		top_sean_area.addComponent(dateValidStateLabel, "top:80.0px;left:340.0px;");
+		dateValidStateLabel.setValue("Label");
+		top_sean_area.addComponent(dateValidStateLabel,
+				"top:80.0px;left:340.0px;");
 		
 		return top_sean_area;
 	}
