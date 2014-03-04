@@ -24,6 +24,7 @@ public class Vaadintest2Application extends Application {
 		
 		layout.addComponent(doc);
 		getMainWindow().setContent(layout);
+		
 	}
 
 }
