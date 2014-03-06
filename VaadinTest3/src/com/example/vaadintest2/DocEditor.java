@@ -112,9 +112,7 @@ public class DocEditor extends CustomComponent {
 		
 		comboBox_2.setNullSelectionAllowed(false);
 		comboBox_2.addItem("Query a specific HEC catalogue");
-		comboBox_2.addItem("ASD");
-		comboBox_2.addItem("sdf");
-
+		comboBox_2.addItem("Use a workflow");
 	}
 
 	private void applyMainLayoutHooks() {
