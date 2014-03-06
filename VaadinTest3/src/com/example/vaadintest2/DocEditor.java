@@ -111,8 +111,24 @@ public class DocEditor extends CustomComponent {
 		dateInputTwo.setDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		comboBox_2.setNullSelectionAllowed(false);
+		comboBox_2.setInvalidAllowed(false);
 		comboBox_2.addItem("Query a specific HEC catalogue");
 		comboBox_2.addItem("Use a workflow");
+		comboBox_2.setValue(comboBox_2.getItemIds().iterator().next());
+		
+		comboBox_3.setNullSelectionAllowed(false);
+		comboBox_3.setInvalidAllowed(false);
+		comboBox_3.addItem("Query a specific HEC catalogue");
+		comboBox_3.addItem("Use a workflow");
+		comboBox_3.setValue(comboBox_2.getItemIds().iterator().next());
+		
+		comboBox_6.setNullSelectionAllowed(false);
+		comboBox_6.setInvalidAllowed(false);
+		//query catalogue list to get the names
+		comboBox_6.addItem("GOES Soft X-ray Flare List");
+		comboBox_6.setValue(comboBox_2.getItemIds().iterator().next());
+		
+		//button_3.setIcon(new ExternalResource(""));
 	}
 
 	private void applyMainLayoutHooks() {
