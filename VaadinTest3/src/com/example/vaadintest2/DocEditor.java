@@ -214,12 +214,12 @@ public class DocEditor extends CustomComponent {
 		mainLayout.setStyleName("Use a pre-defined workflow");
 		mainLayout.setCaption("Min Speed");
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("880px");
+		mainLayout.setWidth("100%");
 		mainLayout.setHeight("800px");
 		mainLayout.setMargin(false);
 		
 		// top-level component properties
-		setWidth("880px");
+		setWidth("100.0%");
 		setHeight("800px");
 		
 		// verticalLayout_3
@@ -234,7 +234,7 @@ public class DocEditor extends CustomComponent {
 		// common part: create layout
 		verticalLayout_3 = new VerticalLayout();
 		verticalLayout_3.setImmediate(false);
-		verticalLayout_3.setWidth("-1px");
+		verticalLayout_3.setWidth("100.0%");
 		verticalLayout_3.setHeight("-1px");
 		verticalLayout_3.setMargin(false);
 		
@@ -250,7 +250,7 @@ public class DocEditor extends CustomComponent {
 		// common part: create layout
 		tabSheet_1 = new TabSheet();
 		tabSheet_1.setImmediate(true);
-		tabSheet_1.setWidth("-1px");
+		tabSheet_1.setWidth("100.0%");
 		tabSheet_1.setHeight("-1px");
 		
 		// verticalLayout_4
@@ -269,7 +269,7 @@ public class DocEditor extends CustomComponent {
 		// common part: create layout
 		verticalLayout_4 = new VerticalLayout();
 		verticalLayout_4.setImmediate(false);
-		verticalLayout_4.setWidth("800px");
+		verticalLayout_4.setWidth("100.0%");
 		verticalLayout_4.setHeight("800px");
 		verticalLayout_4.setMargin(false);
 		
@@ -600,7 +600,7 @@ public class DocEditor extends CustomComponent {
 		verticalLayout_2.setStyleName("Use a pre-defined workflow");
 		verticalLayout_2.setCaption("Min Speed");
 		verticalLayout_2.setImmediate(false);
-		verticalLayout_2.setWidth("880px");
+		verticalLayout_2.setWidth("100.0%");
 		verticalLayout_2.setHeight("900px");
 		verticalLayout_2.setMargin(false);
 		
