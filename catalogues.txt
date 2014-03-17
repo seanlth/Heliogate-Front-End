@@ -1,0 +1,316 @@
+ngdc_halpha_flare
+NGDC H-alpha Flare List
+1980-01-01
+2010-01-31
+kso_halpha_flare
+Kanzelhoehe Solar Observatory H-alpha Flare List
+1984-01-02
+2013-12-28
+soho_lasco_cme
+SOHO/LASCO CME Event List
+1996-01-11
+2013-06-30
+noaa_energetic_event
+NOAA Solar Energetic Event List
+1996-01-04
+2014-03-10
+goes_proton_event
+NOAA GOES Solar Proton Event (SEP) List
+1976-04-30
+2014-02-25
+cme_forbush_event
+CME-related Forbush Decrease Event List [E. Eroshenko]
+1957-08-29
+2006-12-14
+aad_gle
+AAD Ground Level Enhancement (GLE) List
+1942-02-28
+2006-12-13
+nmdb_gle_list
+NMDB Ground Level Enhancement (GLE) List
+1942-02-28
+2006-12-13
+ngdc_aastar_storm
+NGDC AA* Major Magnetic Storm
+1868-03-20
+2010-08-03
+ngdc_apstar_storm
+NGDC Ap* Major Magnetic Storm
+1932-03-10
+2010-08-03
+ngdc_ssc
+NGDC Storm Sudden Commencement List
+1968-01-02
+2011-01-31
+wind_mfi_mag_cloud
+WIND/MFI Magnetic Cloud List
+1995-02-08
+2007-11-19
+istp_sw_event
+ISTP Solar Wind Candidate Event List
+1986-07-01
+2001-03-05
+tsrs_solar_radio_event
+Trieste Solar Radio System (TSRS) Solar Radio Event List
+2000-07-12
+2006-12-05
+wind_wave_typeii
+Type II shock from WIND/WAVES [Cremades et al., 2007]
+1997-09-21
+2004-12-05
+hfc_wind_waves
+Type III Radio Bursts for WIND/Waves [HELIO HFC]
+1994-11-10
+2011-06-08
+hfc_level3_wind_waves
+Type III Radio Bursts for WIND/Waves [HELIO HFC]
+1994-11-10
+2011-12-31
+wind_stereo_ii_iv_radioburst
+Type II and IV Radio Burst Candidate List for WIND and STEREO
+1994-12-23
+2009-05-05
+wind_typeii_soho_cme
+Type II Radio Burst (WIND) and Associated CME (SOHO) List
+1997-04-01
+2008-04-26
+yohkoh_hxr_flare
+Yohkoh/HXT Hard X-ray Flare List [Sato et al., 2006; supplemental]
+1991-10-01
+2001-12-14
+rhessi_hxr_flare
+RHESSI Hard X-ray Flare List
+2002-02-12
+2014-03-10
+timed_see_flare
+TIMED/SEE EUV Flare Catalog
+2002-03-09
+2007-06-03
+gevloc_sxr_flare
+GOES SXR flares from SSW Latest Events (gevloc)
+2002-09-26
+2014-03-13
+ulysses_grb_xray_flare
+Ulysses/GRB X-ray Flare List [Tranquille et al., 2009]
+1990-11-11
+2003-11-03
+ulysses_hxr_flare
+Ulysses/GRB List of Solar Hard X-Ray Flares [Tranquille et al., 2009]
+1990-12-23
+2003-11-04
+ulysses_hxr_flare_farside
+Ulysses/GRB List of Solar Hard X-Ray Flares on the Far-side of the Sun [Tranquille et al., 2009]
+1991-03-03
+2003-11-16
+stereo_euvi_event
+STEREO/EUVI Event List
+2006-12-04
+2009-07-08
+cactus_soho_cme
+CACTus CME Catalogue for SOHO/LASCO
+1997-05-17
+2014-03-14
+cactus_stereoa_cme
+CACTus CME Catalogue for STEREO-A/COR2
+2007-03-03
+2014-03-13
+cactus_stereob_cme
+CACTus CME Catalogue for STEREO-B/COR2
+2007-03-18
+2014-03-13
+cactus_soho_flow
+CACTus Flow Catalogue for SOHO/LASCO
+1997-05-06
+2014-03-14
+cactus_stereoa_flow
+CACTus Flow Catalogue for STEREO-A/COR2
+2007-03-07
+2014-03-09
+cactus_stereob_flow
+CACTus Flow Catalogue for STEREO-B/COR2
+2007-03-01
+2014-03-13
+cactus_all
+CACTus (All) CME and Flow Catalogues for SOHO and STEREO
+1997-05-06
+2014-03-14
+seeds_soho
+SEEDS CME Catalogue for SOHO/LASCO
+1996-01-31
+2014-03-06
+seeds_sta
+SEEDS CME Catalogue for STEREO-A/COR2
+2007-03-05
+2014-03-09
+seeds_stb
+SEEDS CME Catalogue for STEREO-B/COR2
+2007-03-05
+2014-03-11
+seeds_all
+SEEDS (All) CME Catalogues for SOHO and STEREO
+1996-01-31
+2014-03-11
+ulysses_swoops_icme
+Ulysses/SWOOPS Interplanetary CME (ICME) List [Ebert et al., 2009]
+1992-03-10
+2007-07-04
+halo_cme_flare_magnetic_storm
+SOHO/LASCO Halo CME with Associated Flare and Magnetic Storm List [Gopalswamy et al., 2009]
+1996-04-29
+2005-12-07
+wind_ace_sir
+Stream Interaction Regions (SIR) from Wind and ACE data [Jian et al., 2011]
+1995-01-01
+2009-12-25
+wind_mfi_ip_shock
+Interplanetary Shock List from WIND/MFI
+1994-12-05
+1998-06-25
+soho_pm_ip_shock
+Interplanetary Shock List from SOHO/CELIAS-PM
+1996-09-26
+2014-02-27
+stereo_hi_cme
+STEREO/HI CME Event List [R. Harrison]
+2007-03-31
+2008-12-27
+stereo_hi_sw_transient
+Solar Wind Transients (SIR, ICME) from STEREO/HI, derived from J-Plots
+2007-03-25
+2012-08-10
+stereoa_impactplastic_icme
+Interplanetary CME (ICME) from STEREO-A/IMPACT-PLASTIC
+2006-12-14
+2012-11-26
+stereob_impactplastic_icme
+Interplanetary CME (ICME) from STEREO-B/IMPACT-PLASTIC
+2006-12-14
+2012-12-25
+stereoa_impactplastic_sir
+Stream Interaction Regions (SIR) from STEREO-A/IMPACT-PLASTIC
+2007-03-04
+2012-12-27
+stereob_impactplastic_sir
+Stream Interaction Regions (SIR) from STEREO-B/IMPACT-PLASTIC
+2007-03-04
+2012-12-25
+stereoa_impactplastic_shock
+Interplanetary Shocks from STEREO-A/IMPACT-PLASTIC
+2007-01-14
+2012-12-17
+stereob_impactplastic_shock
+Interplanetary Shocks from STEREO-B/IMPACT-PLASTIC
+2007-01-14
+2012-12-25
+stereoa_let_sir
+Stream Interaction Regions (SIR) from STEREO-A/LET
+2007-01-05
+2011-05-22
+stereob_let_sir
+Stream Interaction Regions (SIR) from STEREO-B/LET
+2007-01-05
+2011-05-20
+mars_earth_icme
+Mars-Earth Interplanetary CME (ICME) List [Falkenberg et al., 2011]
+2001-04-04
+2003-11-20
+icme_earth_cycle23
+Near-Earth Interplanetary CMEs (ICME) During Solar Cycle 23 [Richardson and Cane, 2010]
+1996-05-27
+2009-12-19
+cme_inner_heliosphere
+CMEs in the Inner Heliosphere [Manoharen, 2006]
+1998-10-15
+2004-07-25
+soho_eit_wave_transient
+SOHO/EIT Wave Transient List [B. J. Thompson and D. C. Myers, 2009]
+1997-03-25
+1998-06-16
+solar_sep_event
+Study of SEP Events of 1997-2006 [Cane et al., 2010]
+1997-04-01
+2006-12-14
+gradual_sep
+Gradual SEP events [Barnard and Lockwood, 2011]
+1968-11-18
+2006-12-14
+msl_rad_sep
+MSL/RAD SEP events during cruise to Mars [Wimmer-Schweingruber et al., 2013]
+2012-01-23
+2012-05-17
+mgs_er_sep
+MGS/ER SEP events at Mars, 1999-2006 [Delory et al., 2012]
+2000-05-05
+2005-08-23
+goes_flare_sep_event
+GOES strong flare and SEP list [Klein et al., 2011]
+1996-07-09
+2006-12-14
+goes_flare_no_sep_radio_cme
+GOES strong flare with radio and CME associations, no SEP [Klein et al., 2011]
+1996-07-09
+2004-10-30
+stereoa_let_sep
+SEP Events from STEREO-A/LET
+2007-01-11
+2011-06-08
+stereob_let_sep
+SEP Events from STEREO-B/LET
+2007-01-11
+2011-06-17
+noaa_active_region_summary
+NOAA/USAF Solar Active Region Summary List
+1996-01-02
+2014-03-11
+noaa_daily_solar_data
+NOAA Daily Solar Data List
+1994-01-01
+2014-03-10
+yohkoh_sxt_trace_list
+Yohkoh SXT TRACE flare list
+1998-07-14
+2001-12-14
+lasco_cme_list
+LASCO Preliminary CME List
+1996-01-14
+2999-01-01
+bas_magnetic_storms
+BAS Magnetic Storms [R. Horne]
+1992-01-08
+2002-12-28
+soho_camp
+SoHO Campaign
+1995-12-02
+2010-01-11
+sidc_sunspot_number
+SIDC Smoothed Monthly Sunspot No.
+1749-07-01
+2012-12-01
+drao_10cm_flux
+DRAO 10.7cm Radio Flux Monitor
+1975-01-01
+2007-06-06
+solar_wind_event
+Solar Wind Events
+1993-01-10
+2001-03-05
+latest_gev_flare
+latest_gev_flare
+2010-10-13
+2013-08-15
+gevloc_flares
+gevloc_flares
+2010-11-16
+2014-03-15
+wind_mfi_bs_crossing_time
+WIND/MFI Bow Shock Crossing Time List
+1994-11-12
+2003-10-13
+wind_sw_crossing_time
+WIND Solar Wind Crossing Time List
+1994-11-16
+2000-08-17
+imp8_sw_crossing_time
+IMP-8 Solar Wind Crossing Time List
+1993-01-30
+1996-07-11
