@@ -134,8 +134,8 @@ public class DocEditor extends CustomComponent {
 		
 		//should only be run when new catalogues have been added
 		try {
-			System.out.println(fetchCatalogueData(new Date(2014, 2, 2), new Date(2014, 2, 3), "cactus_soho_cme"));
-			//updataCatalogueData();
+			//System.out.println(fetchCatalogueData(new Date(2014, 2, 2), new Date(2014, 2, 3), "cactus_soho_cme"));
+			updataCatalogueData();
 		} catch (Exception e) {
 			System.out.println("ERROR");
 		}
@@ -231,28 +231,11 @@ public class DocEditor extends CustomComponent {
 	private String fetchCatalogueData(Date firstDate, Date lastDate, String catalogueName) throws IOException 
 	{	
 		String table = "";
-		final URL catalogue = new URL("http://hec.helio-vo.eu/hec/hec_gui_fetch.php?y_from=" + firstDate.getYear() + "&mo_from=" + firstDate.getMonth() + "&d_from="+ firstDate.getDay() + "&y_to=" + lastDate.getYear() + "&mo_to=" + lastDate.getMonth() + "&d_to=" + lastDate.getDay() + "&radioremote=on&titlesearch2=&" + catalogueName + "=istable");
-        BufferedReader inAddress = new BufferedReader(
-        new InputStreamReader(catalogue.openStream()));
-        String inputLine;
-        inputLine = inAddress.readLine();
-        
-        String address = "http://hec.helio-vo.eu/hec/";
-        
-        while ((inputLine = inAddress.readLine()) != null) {			
-        	if (inputLine.contains("Download as&nbsp;HELIO Service")) {
-    			int nameIdIndex = inputLine.indexOf("Download as&nbsp;HELIO Service")+40;
-        		for (int i = nameIdIndex; inputLine.charAt(i) != '"'; i++) {
-    				address += inputLine.charAt(i); 
-    			} 
-        	}
-        }
-        
-		final URL tableURL = new URL(address);
+		final URL oracle = new URL("http://hec.helio-vo.eu/hec/hec_gui_fetch.php?y_from=" + firstDate.getYear() + "&mo_from=" + firstDate.getMonth() + "&d_from="+ firstDate.getDay() + "&y_to=" + lastDate.getYear() + "&mo_to=" + lastDate.getMonth() + "&d_to=" + lastDate.getDay() + "&radioremote=on&titlesearch2=&" + catalogueName + "=istable");
         BufferedReader in = new BufferedReader(
-        new InputStreamReader(catalogue.openStream()));
-        inputLine = in.readLine();
-        	
+        new InputStreamReader(oracle.openStream()));
+
+        String inputLine;
         int line = 0;
         boolean inTable = false;
         while ((inputLine = in.readLine()) != null) {
@@ -283,6 +266,7 @@ public class DocEditor extends CustomComponent {
         	    
         line = br.readLine();
         while (line != null) {
+    	    //System.out.println("Here2");
         	String nameId = "";
 			String name = "";
 			String firstDate = "";
