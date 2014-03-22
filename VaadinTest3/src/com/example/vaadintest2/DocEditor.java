@@ -1,7 +1,4 @@
 
-/*Master branch*/
-//
-
 package com.example.vaadintest2;
 
 import java.io.BufferedReader;
@@ -135,7 +132,7 @@ public class DocEditor extends CustomComponent {
 		//should only be run when new catalogues have been added
 		try {
 			//System.out.println(fetchCatalogueData(new Date(2014, 2, 2), new Date(2014, 2, 3), "cactus_soho_cme"));
-			updataCatalogueData();
+			//updataCatalogueData();
 		} catch (Exception e) {
 			System.out.println("ERROR");
 		}
@@ -179,47 +176,88 @@ public class DocEditor extends CustomComponent {
 		//button_3.setIcon(new ExternalResource(""));
 	}
 	
+	
+	private boolean contains(int array[], int number) {
+	    for (int i = 0; i < array.length; i++) {
+	    	if ( array[i] == number) {
+	            return true;
+	    	}
+	    }
+	    return false;
+	}
+	
 	//could be replaced by putting catalogue info in file
 	private void updataCatalogueData() throws Exception
 	{
 		PrintWriter out = new PrintWriter(catalogueLocation);
 		
-		final URL oracle = new URL("http://hec.helio-vo.eu/hec/hec_gui.php");
+		final URL catalogues = new URL("http://hec.helio-vo.eu/hec/hec_gui.php");
         BufferedReader in = new BufferedReader(
-        new InputStreamReader(oracle.openStream()));
+        new InputStreamReader(catalogues.openStream()));
 
         String inputLine;
+        
+        int CMECataloguesIndices[] = new int[32]; 
+        int indices = 0;
+        
+        
+        while ((inputLine = in.readLine()) != null) {
+        	if (inputLine.contains("var cmearr=[")) {
+    			int nameIdIndex = inputLine.indexOf("var cmearr=[") + 13;
+        		for (int i = nameIdIndex; inputLine.charAt(i) != '\''; i+=3) {
+        			String index = "";
+        			for (; inputLine.charAt(i) != '\''; i++) {
+        				index += inputLine.charAt(i);
+        			}
+        			CMECataloguesIndices[indices++] = Integer.parseInt(index);
+        			if (inputLine.charAt(i+1) == ']') {
+        				break;
+        			}
+        		}
+        	}
+        } 
+        in.close();
+        in = new BufferedReader(new InputStreamReader(catalogues.openStream()));
+
+
         int line = 0;
         while ((inputLine = in.readLine()) != null) {
-        	if (inputLine.contains("tr id")) {
-        		if (line > 0) {
-        			String nameId = "";
-        			String name = "";
-        			String firstDate = "";
-        			String lastDate = "";
-        			int nameIdIndex = inputLine.indexOf("name")+6;
-        			for (int i = nameIdIndex; inputLine.charAt(i) != '"'; i++) {
-        				nameId += inputLine.charAt(i); 
-        			}
-        			int nameIndex = inputLine.indexOf("\"Catalogue\"")+12;
-        			for (int i = nameIndex; inputLine.charAt(i) != '<'; i++) {
-        				name += inputLine.charAt(i); 
-        			}
-        			int firstDateIndex = inputLine.indexOf("td class=\"From\"")+16;
-        			for (int i = firstDateIndex; inputLine.charAt(i) != '<'; i++) {
-        				firstDate += inputLine.charAt(i); 
-        			}
-        			int lastDateIndex = inputLine.indexOf("td class=\"To\"")+14;
-        			for (int i = lastDateIndex; inputLine.charAt(i) != '<'; i++) {
-        				lastDate += inputLine.charAt(i); 
-        			}
-        			String catalogue = nameId + "\n" + name + "\n" + firstDate + "\n" + lastDate;
-        			out.println(catalogue);
+        	if (inputLine.contains("tr id=\"cat")) {
+        		int catNumber = inputLine.indexOf("tr id=\"cat")+10;
+        		String catNumberString = "";
+        		for (int j = catNumber; inputLine.charAt(j) != '\"'; j++) {
+        			catNumberString += inputLine.charAt(j);
         		}
-        		line++;
-        		if (line > 79) {
-        			break;
+        		if (contains(CMECataloguesIndices, Integer.parseInt(catNumberString))) {
+        			if (line > 31) {
+        				break;
+        			}
+            			String nameId = "";
+            			String name = "";
+            			String firstDate = "";
+            			String lastDate = "";
+            			int nameIdIndex = inputLine.indexOf("name")+6;
+            			for (int i = nameIdIndex; inputLine.charAt(i) != '"'; i++) {
+            				nameId += inputLine.charAt(i); 
+            			}
+            			int nameIndex = inputLine.indexOf("\"Catalogue\"")+12;
+            			for (int i = nameIndex; inputLine.charAt(i) != '<'; i++) {
+            				name += inputLine.charAt(i); 
+            			}
+            			int firstDateIndex = inputLine.indexOf("td class=\"From\"")+16;
+            			for (int i = firstDateIndex; inputLine.charAt(i) != '<'; i++) {
+            				firstDate += inputLine.charAt(i); 
+            			}
+            			int lastDateIndex = inputLine.indexOf("td class=\"To\"")+14;
+            			for (int i = lastDateIndex; inputLine.charAt(i) != '<'; i++) {
+            				lastDate += inputLine.charAt(i); 
+            			}
+            			String catalogue = nameId + "\n" + name + "\n" + firstDate + "\n" + lastDate;
+            			out.println(catalogue);
+            		line++;
+            		
         		}
+        		
         	}
         }
         	
@@ -231,11 +269,28 @@ public class DocEditor extends CustomComponent {
 	private String fetchCatalogueData(Date firstDate, Date lastDate, String catalogueName) throws IOException 
 	{	
 		String table = "";
-		final URL oracle = new URL("http://hec.helio-vo.eu/hec/hec_gui_fetch.php?y_from=" + firstDate.getYear() + "&mo_from=" + firstDate.getMonth() + "&d_from="+ firstDate.getDay() + "&y_to=" + lastDate.getYear() + "&mo_to=" + lastDate.getMonth() + "&d_to=" + lastDate.getDay() + "&radioremote=on&titlesearch2=&" + catalogueName + "=istable");
-        BufferedReader in = new BufferedReader(
-        new InputStreamReader(oracle.openStream()));
-
+		final URL catalogue = new URL("http://hec.helio-vo.eu/hec/hec_gui_fetch.php?y_from=" + firstDate.getYear() + "&mo_from=" + firstDate.getMonth() + "&d_from="+ firstDate.getDay() + "&y_to=" + lastDate.getYear() + "&mo_to=" + lastDate.getMonth() + "&d_to=" + lastDate.getDay() + "&radioremote=on&titlesearch2=&" + catalogueName + "=istable");
+        BufferedReader inAddress = new BufferedReader(
+        new InputStreamReader(catalogue.openStream()));
         String inputLine;
+        inputLine = inAddress.readLine();
+        
+        String address = "http://hec.helio-vo.eu/hec/";
+        
+        while ((inputLine = inAddress.readLine()) != null) {			
+        	if (inputLine.contains("Download as&nbsp;HELIO Service")) {
+    			int nameIdIndex = inputLine.indexOf("Download as&nbsp;HELIO Service")+40;
+        		for (int i = nameIdIndex; inputLine.charAt(i) != '"'; i++) {
+    				address += inputLine.charAt(i); 
+    			} 
+        	}
+        }
+        
+		final URL tableURL = new URL(address);
+        BufferedReader in = new BufferedReader(
+        new InputStreamReader(catalogue.openStream()));
+        inputLine = in.readLine();
+        	
         int line = 0;
         boolean inTable = false;
         while ((inputLine = in.readLine()) != null) {
@@ -259,14 +314,13 @@ public class DocEditor extends CustomComponent {
 	
 	private Catalogue[] queryCatalogueList() throws Exception
 	{
-		Catalogue catalogueData[] = new Catalogue[79]; //just hard coded for now
+		Catalogue catalogueData[] = new Catalogue[29]; //just hard coded for now last three catalogues seem to be empty
 		BufferedReader br = new BufferedReader(new FileReader(catalogueLocation));
 	    String line = "";
 	    int lineNumber = 0;
         	    
         line = br.readLine();
         while (line != null) {
-    	    //System.out.println("Here2");
         	String nameId = "";
 			String name = "";
 			String firstDate = "";
@@ -302,71 +356,15 @@ public class DocEditor extends CustomComponent {
 
 			catalogueData[lineNumber] = new Catalogue(nameId, name, new Date(firstYear, firstMonth, firstDay), new Date(lastYear, lastMonth, lastDay)); 
 			lineNumber++;
+			if (lineNumber > 28) {
+				break; //ignore last two catalogues
+			}
         }
 	    br.close();
 	    
 		return catalogueData;
 	}
 	
-	
-	
-	
-	
-//	private Catalogue[] queryCatalogueList() throws Exception
-//	{
-//		Catalogue catalogueData[] = new Catalogue[79]; //just hard coded for now
-//		
-//		final URL oracle = new URL("http://hec.helio-vo.eu/hec/hec_gui.php");
-//        BufferedReader in = new BufferedReader(
-//        new InputStreamReader(oracle.openStream()));
-//
-//        String inputLine;
-//        int line = 0;
-//        while ((inputLine = in.readLine()) != null) {
-//        	if (inputLine.contains("tr id")) {
-//        		if (line > 0) {
-//        			String nameId = "";
-//        			String name = "";
-//        			String firstDate = "";
-//        			String lastDate = "";
-//        			int nameIdIndex = inputLine.indexOf("name")+6;
-//        			for (int i = nameIdIndex; inputLine.charAt(i) != '"'; i++) {
-//        				nameId += inputLine.charAt(i); 
-//        			}
-//        			int nameIndex = inputLine.indexOf("\"Catalogue\"")+12;
-//        			for (int i = nameIndex; inputLine.charAt(i) != '<'; i++) {
-//        				name += inputLine.charAt(i); 
-//        			}
-//        			int firstDateIndex = inputLine.indexOf("td class=\"From\"")+16;
-//        			for (int i = firstDateIndex; inputLine.charAt(i) != '<'; i++) {
-//        				firstDate += inputLine.charAt(i); 
-//        			}
-//        			int lastDateIndex = inputLine.indexOf("td class=\"To\"")+14;
-//        			for (int i = firstDateIndex; inputLine.charAt(i) != '<'; i++) {
-//        				lastDate += inputLine.charAt(i); 
-//        			}
-//        			int firstYear = Integer.parseInt("" + firstDate.charAt(0) + firstDate.charAt(1) + firstDate.charAt(2) + firstDate.charAt(3));
-//        			int firstMonth = Integer.parseInt("" + firstDate.charAt(5) + firstDate.charAt(6));
-//        			int firstDay = Integer.parseInt("" + firstDate.charAt(8) + firstDate.charAt(9));
-//        			
-//        			int lastYear = Integer.parseInt("" + lastDate.charAt(0) + lastDate.charAt(1) + lastDate.charAt(2) + firstDate.charAt(3));
-//        			int lastMonth = Integer.parseInt("" + lastDate.charAt(5) + lastDate.charAt(6));
-//        			int lastDay = Integer.parseInt("" + lastDate.charAt(8) + lastDate.charAt(9));
-//	
-//        			catalogueData[line-1] = new Catalogue(nameId, name, new Date(firstYear, firstMonth, firstDay), new Date(lastYear, lastMonth, lastDay)); 
-//        		}
-//        		line++;
-//        		if (line > 79) {
-//        			break;
-//        		}
-//        	}
-//        }
-//        	
-//        in.close();
-//		
-//		return catalogueData;
-//	}
-
 	private void applyMainLayoutHooks() {
 		
 		//test APM is ready
