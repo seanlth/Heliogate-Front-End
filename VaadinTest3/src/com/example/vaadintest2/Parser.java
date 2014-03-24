@@ -6,6 +6,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import org.xml.sax.InputSource;
+import java.io.StringReader;
 
 
 public class Parser {
@@ -22,12 +24,9 @@ public class Parser {
 		return eventArray;
 	}
 	
-	public void parse(File xmlFile){
+	public void parse(String xmlStr){
 		try{	
-			//File xmlFile = new File("sampleXML/sample.xml");
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document parsedDoc = builder.parse(xmlFile);
+			Document parsedDoc = convertStringToDocument(xmlStr);
 			
 			NodeList parameterList = parsedDoc.getElementsByTagName("FIELD");
 			NodeList eventList = parsedDoc.getElementsByTagName("TR");
@@ -55,4 +54,17 @@ public class Parser {
 			e.printStackTrace();
 		}
 	}
+	private static Document convertStringToDocument(String xmlStr) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
+        DocumentBuilder builder;  
+        try 
+        {  
+            builder = factory.newDocumentBuilder();  
+            Document doc = builder.parse( new InputSource( new StringReader( xmlStr ) ) ); 
+            return doc;
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } 
+        return null;
+    }
 }
