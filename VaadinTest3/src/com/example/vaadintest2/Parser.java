@@ -1,11 +1,15 @@
 package com.example.vaadintest2;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+
 import java.io.File;
+
 import org.xml.sax.InputSource;
 import java.io.StringReader;
 
@@ -24,10 +28,13 @@ public class Parser {
 		return eventArray;
 	}
 	
-	public void parse(String xmlStr){
+	public void parse(String xml){
 		try{	
-			Document parsedDoc = convertStringToDocument(xmlStr);
-			
+			//File xmlFile = new File("sampleXML/sample.xml");
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document parsedDoc = builder.parse(new InputSource(new StringReader(xml)));
+						
 			NodeList parameterList = parsedDoc.getElementsByTagName("FIELD");
 			NodeList eventList = parsedDoc.getElementsByTagName("TR");
 			NodeList variableList = parsedDoc.getElementsByTagName("TD");
