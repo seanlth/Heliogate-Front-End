@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Random;
 
@@ -103,6 +104,11 @@ public class DocEditor extends CustomComponent {
 	private ComboBox comboBox_5;
 	private Catalogue catalogues[];
 
+	private LinkedList<TextField> parameterFields;
+	private String parameters[];
+	private String parametersData[][];
+
+
 	private String catalogueLocation = "/Users/seanlth/git/Heliogate-Front-End/catalogues.txt";
 
 	/**
@@ -161,17 +167,19 @@ public class DocEditor extends CustomComponent {
 
 
 
-		minSpeedField.setReadOnly(false);
-		maxSpeedField.setReadOnly(false);
-		speedStepField.setReadOnly(false);
-		speedUncertaintyField.setReadOnly(false);
-		minLongitudeField.setReadOnly(false);
-		maxLongitudeField.setReadOnly(false);
-		longitudeStepField.setReadOnly(false);
-		minWidthField.setReadOnly(false);
-		maxWidthField.setReadOnly(false);
-		widthStepField.setReadOnly(false);
-
+//		minSpeedField.setReadOnly(false);
+//		maxSpeedField.setReadOnly(false);
+//		speedStepField.setReadOnly(false);
+//		speedUncertaintyField.setReadOnly(false);
+//		minLongitudeField.setReadOnly(false);
+//		maxLongitudeField.setReadOnly(false);
+//		longitudeStepField.setReadOnly(false);
+//		minWidthField.setReadOnly(false);
+//		maxWidthField.setReadOnly(false);
+//		widthStepField.setReadOnly(false);
+		
+		parameterFields = new LinkedList<TextField>();
+		
 		//button_3.setIcon(new ExternalResource(""));
 	}
 
@@ -285,29 +293,15 @@ public class DocEditor extends CustomComponent {
         }
         
 		final URL tableURL = new URL(address);
-		final URL oracle = new URL("http://hec.helio-vo.eu/hec/hec_gui_fetch.php?y_from=" + firstDate.getYear() + "&mo_from=" + firstDate.getMonth() + "&d_from="+ firstDate.getDay() + "&y_to=" + lastDate.getYear() + "&mo_to=" + lastDate.getMonth() + "&d_to=" + lastDate.getDay() + "&radioremote=on&titlesearch2=&" + catalogueName + "=istable");
         BufferedReader in = new BufferedReader(
         new InputStreamReader(tableURL.openStream()));
-        inputLine = in.readLine();
+        int inputChar = in.read();
 
         int line = 0;
         boolean inTable = false;
-        while (inputLine != null) {
-    		table += inputLine;
-    		inputLine = in.readLine();
-        	
-        	
-//        	if (inputLine.contains("<TABLE BORDER='1'>")) {
-//        		table += inputLine;
-//        		inTable = true;
-//        	}
-//        	else if (inputLine.contains("</TABLE>")) {
-//        		table += inputLine;
-//        		break;
-//        	}
-//        	else if (inTable) {
-//        		table += inputLine;
-//        	}
+        while (inputChar != -1) {
+    		table += (char)inputChar;
+    		inputChar = in.read();
         }
         	
         in.close();
@@ -434,12 +428,43 @@ public class DocEditor extends CustomComponent {
 				}
 				Parser parser = new Parser();
 				parser.parse(xml);
+				
+				parameters = parser.getParameterArray();
+				parametersData = parser.getEventArray();
+				//System.out.println(parametersData[0].length);
+				
 				stage4();
 			}
 		});
 		//set parameters
 		setParametersButton.addListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
+				
+				double xPosition = 100.0; //start position of parameter list
+				double yPosition = 72.0; //start position of parameter list
+
+				for (int i = 0; i < parameterFields.size(); i++) {
+					middle_tom_area.removeComponent(parameterFields.get(i));
+				}
+				parameterFields.clear();
+				
+				for (int i = 0; i < parameters.length; i++) {
+					TextField textField = new TextField();		
+					textField.setCaption(parameters[i]);
+					textField.setImmediate(false);
+					textField.setWidth("100px");
+					textField.setHeight("-1px");
+					textField.setReadOnly(false);
+					textField.setValue(parametersData[0][i]);
+					middle_tom_area.addComponent(textField, "top:" + yPosition + "px;left:"+ xPosition  +"px");
+					xPosition += textField.getWidth() + 10;
+					if (xPosition > 540) {
+						xPosition = 100.0;
+						yPosition += 50;
+					}
+					parameterFields.add(textField);
+				}
+				
 				stage5();
 			}
 		});
@@ -452,21 +477,21 @@ public class DocEditor extends CustomComponent {
 
 
 
-		setParametersButton.addListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				String data[] = findEvents();
-				minSpeedField.setValue(data[0]);
-				maxSpeedField.setValue(data[1]);
-				speedStepField.setValue(data[2]);
-				speedUncertaintyField.setValue(data[3]);
-				minLongitudeField.setValue(data[4]);
-				maxLongitudeField.setValue(data[5]);
-				longitudeStepField.setValue(data[6]);
-				minWidthField.setValue(data[7]);
-				maxWidthField.setValue(data[8]);
-				widthStepField.setValue(data[9]);
-			}
-		});
+//		setParametersButton.addListener(new Button.ClickListener() {
+//			public void buttonClick(ClickEvent event) {
+//				String data[] = findEvents();
+//				minSpeedField.setValue(data[0]);
+//				maxSpeedField.setValue(data[1]);
+//				speedStepField.setValue(data[2]);
+//				speedUncertaintyField.setValue(data[3]);
+//				minLongitudeField.setValue(data[4]);
+//				maxLongitudeField.setValue(data[5]);
+//				longitudeStepField.setValue(data[6]);
+//				minWidthField.setValue(data[7]);
+//				maxWidthField.setValue(data[8]);
+//				widthStepField.setValue(data[9]);
+//			}
+//		});
 
 	}
 
@@ -579,118 +604,118 @@ public class DocEditor extends CustomComponent {
 
 
 		// speedStepField
-		speedStepField = new TextField();
-		speedStepField.setCaption("Speed Step");
-		speedStepField.setImmediate(false);
-		speedStepField.setEnabled(false);
-		speedStepField.setWidth("-1px");
-		speedStepField.setHeight("-1px");
-		middle_tom_area
-		.addComponent(speedStepField, "top:72.0px;left:483.0px;");
-
-
-
-		// minSpeedField
-		minSpeedField = new TextField();
-		minSpeedField.setCaption("Min Speed");
-		minSpeedField.setImmediate(false);
-		minSpeedField.setEnabled(false);
-		minSpeedField.setWidth("-1px");
-		minSpeedField.setHeight("-1px");
-		middle_tom_area.addComponent(minSpeedField, "top:72.0px;left:204.0px;");
-
-
-		// maxSpeedField
-		maxSpeedField = new TextField();
-		maxSpeedField.setCaption("Max Speed");
-		maxSpeedField.setImmediate(false);
-		maxSpeedField.setEnabled(false);
-		maxSpeedField.setWidth("-1px");
-		maxSpeedField.setHeight("-1px");
-		middle_tom_area.addComponent(maxSpeedField, "top:72.0px;left:344.0px;");
-
-
-
-		// speedUncertaintyField
-		speedUncertaintyField = new TextField();
-		speedUncertaintyField.setCaption("Speed Uncertainty");
-		speedUncertaintyField.setImmediate(false);
-		speedUncertaintyField.setEnabled(false);
-		speedUncertaintyField.setWidth("-1px");
-		speedUncertaintyField.setHeight("-1px");
-		middle_tom_area.addComponent(speedUncertaintyField,
-				"top:119.0px;left:204.0px;");
-
-
-
-		// maxLongitudeField
-		maxLongitudeField = new TextField();
-		maxLongitudeField.setCaption("Max Longitude");
-		maxLongitudeField.setImmediate(false);
-		maxLongitudeField.setEnabled(false);
-		maxLongitudeField.setWidth("-1px");
-		maxLongitudeField.setHeight("-1px");
-		middle_tom_area.addComponent(maxLongitudeField,
-				"top:164.0px;left:344.0px;");
-
-
-
-		// longitudeStepField
-		longitudeStepField = new TextField();
-		longitudeStepField.setCaption("Longitude Step");
-		longitudeStepField.setImmediate(false);
-		longitudeStepField.setEnabled(false);
-		longitudeStepField.setWidth("-1px");
-		longitudeStepField.setHeight("-1px");
-		middle_tom_area.addComponent(longitudeStepField,
-				"top:164.0px;left:483.0px;");
-
-
-
-		// minLongitudeField
-		minLongitudeField = new TextField();
-		minLongitudeField.setCaption("Min Longitude");
-		minLongitudeField.setImmediate(false);
-		minLongitudeField.setEnabled(false);
-		minLongitudeField.setWidth("-1px");
-		minLongitudeField.setHeight("-1px");
-		middle_tom_area.addComponent(minLongitudeField,
-				"top:164.0px;left:204.0px;");
-
-
-
-		// minWidthField
-		minWidthField = new TextField();
-		minWidthField.setCaption("Min Width");
-		minWidthField.setImmediate(false);
-		minWidthField.setEnabled(false);
-		minWidthField.setWidth("-1px");
-		minWidthField.setHeight("-1px");
-		middle_tom_area
-		.addComponent(minWidthField, "top:210.0px;left:204.0px;");
-
-
-
-		// maxWidthField
-		maxWidthField = new TextField();
-		maxWidthField.setCaption("Max Width");
-		maxWidthField.setImmediate(false);
-		maxWidthField.setEnabled(false);
-		maxWidthField.setWidth("-1px");
-		maxWidthField.setHeight("-1px");
-		middle_tom_area
-		.addComponent(maxWidthField, "top:210.0px;left:344.0px;");
-
-
-		// widthStepField
-		widthStepField = new TextField();
-		widthStepField.setCaption("Width Step");
-		widthStepField.setImmediate(false);
-		widthStepField.setEnabled(false);
-		widthStepField.setWidth("-1px");
-		widthStepField.setHeight("-1px");
-		middle_tom_area.addComponent(widthStepField,
-				"top:210.0px;left:483.0px;");
+//		speedStepField = new TextField();		
+//		speedStepField.setCaption("Speed Step");
+//		speedStepField.setImmediate(false);
+//		speedStepField.setEnabled(false);
+//		speedStepField.setWidth("-1px");
+//		speedStepField.setHeight("-1px");
+//		middle_tom_area
+//		.addComponent(speedStepField, "top:72.0px;left:483.0px;");
+//
+//
+//
+//		// minSpeedField
+//		minSpeedField = new TextField();
+//		minSpeedField.setCaption("Min Speed");
+//		minSpeedField.setImmediate(false);
+//		minSpeedField.setEnabled(false);
+//		minSpeedField.setWidth("-1px");
+//		minSpeedField.setHeight("-1px");
+//		middle_tom_area.addComponent(minSpeedField, "top:72.0px;left:204.0px;");
+//
+//
+//		// maxSpeedField
+//		maxSpeedField = new TextField();
+//		maxSpeedField.setCaption("Max Speed");
+//		maxSpeedField.setImmediate(false);
+//		maxSpeedField.setEnabled(false);
+//		maxSpeedField.setWidth("-1px");
+//		maxSpeedField.setHeight("-1px");
+//		middle_tom_area.addComponent(maxSpeedField, "top:72.0px;left:344.0px;");
+//
+//
+//
+//		// speedUncertaintyField
+//		speedUncertaintyField = new TextField();
+//		speedUncertaintyField.setCaption("Speed Uncertainty");
+//		speedUncertaintyField.setImmediate(false);
+//		speedUncertaintyField.setEnabled(false);
+//		speedUncertaintyField.setWidth("-1px");
+//		speedUncertaintyField.setHeight("-1px");
+//		middle_tom_area.addComponent(speedUncertaintyField,
+//				"top:119.0px;left:204.0px;");
+//
+//
+//
+//		// maxLongitudeField
+//		maxLongitudeField = new TextField();
+//		maxLongitudeField.setCaption("Max Longitude");
+//		maxLongitudeField.setImmediate(false);
+//		maxLongitudeField.setEnabled(false);
+//		maxLongitudeField.setWidth("-1px");
+//		maxLongitudeField.setHeight("-1px");
+//		middle_tom_area.addComponent(maxLongitudeField,
+//				"top:164.0px;left:344.0px;");
+//
+//
+//
+//		// longitudeStepField
+//		longitudeStepField = new TextField();
+//		longitudeStepField.setCaption("Longitude Step");
+//		longitudeStepField.setImmediate(false);
+//		longitudeStepField.setEnabled(false);
+//		longitudeStepField.setWidth("-1px");
+//		longitudeStepField.setHeight("-1px");
+//		middle_tom_area.addComponent(longitudeStepField,
+//				"top:164.0px;left:483.0px;");
+//
+//
+//
+//		// minLongitudeField
+//		minLongitudeField = new TextField();
+//		minLongitudeField.setCaption("Min Longitude");
+//		minLongitudeField.setImmediate(false);
+//		minLongitudeField.setEnabled(false);
+//		minLongitudeField.setWidth("-1px");
+//		minLongitudeField.setHeight("-1px");
+//		middle_tom_area.addComponent(minLongitudeField,
+//				"top:164.0px;left:204.0px;");
+//
+//
+//
+//		// minWidthField
+//		minWidthField = new TextField();
+//		minWidthField.setCaption("Min Width");
+//		minWidthField.setImmediate(false);
+//		minWidthField.setEnabled(false);
+//		minWidthField.setWidth("-1px");
+//		minWidthField.setHeight("-1px");
+//		middle_tom_area
+//		.addComponent(minWidthField, "top:210.0px;left:204.0px;");
+//
+//
+//
+//		// maxWidthField
+//		maxWidthField = new TextField();
+//		maxWidthField.setCaption("Max Width");
+//		maxWidthField.setImmediate(false);
+//		maxWidthField.setEnabled(false);
+//		maxWidthField.setWidth("-1px");
+//		maxWidthField.setHeight("-1px");
+//		middle_tom_area
+//		.addComponent(maxWidthField, "top:210.0px;left:344.0px;");
+//
+//
+//		// widthStepField
+//		widthStepField = new TextField();
+//		widthStepField.setCaption("Width Step");
+//		widthStepField.setImmediate(false);
+//		widthStepField.setEnabled(false);
+//		widthStepField.setWidth("-1px");
+//		widthStepField.setHeight("-1px");
+//		middle_tom_area.addComponent(widthStepField,
+//				"top:210.0px;left:483.0px;");
 
 
 		// absoluteLayout_1
@@ -929,16 +954,16 @@ public class DocEditor extends CustomComponent {
 	private void stage4(){
 		comboBox_4.setEnabled(true);
 		comboBox_5.setEnabled(true);
-		minSpeedField.setEnabled(true);
-		maxSpeedField.setEnabled(true);
-		speedStepField.setEnabled(true);
-		speedUncertaintyField.setEnabled(true);
-		minLongitudeField.setEnabled(true);
-		maxLongitudeField.setEnabled(true);
-		longitudeStepField.setEnabled(true);
-		minWidthField.setEnabled(true);
-		maxWidthField.setEnabled(true);
-		widthStepField.setEnabled(true);
+//		minSpeedField.setEnabled(true);
+//		maxSpeedField.setEnabled(true);
+//		speedStepField.setEnabled(true);
+//		speedUncertaintyField.setEnabled(true);
+//		minLongitudeField.setEnabled(true);
+//		maxLongitudeField.setEnabled(true);
+//		longitudeStepField.setEnabled(true);
+//		minWidthField.setEnabled(true);
+//		maxWidthField.setEnabled(true);
+//		widthStepField.setEnabled(true);
 		setParametersButton.setEnabled(true);
 	}
 	private void stage5(){

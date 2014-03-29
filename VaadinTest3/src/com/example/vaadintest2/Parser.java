@@ -30,11 +30,12 @@ public class Parser {
 	
 	public void parse(String xml){
 		try{	
-			//File xmlFile = new File("sampleXML/sample.xml");
+			File xmlFile = new File("/Users/seanlth/git/Heliogate-Front-End/Heliogate/VaadinTest3/sampleXML/sample.xml");
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document parsedDoc = builder.parse(new InputSource(new StringReader(xml)));
-						
+			//Document parsedDoc = builder.parse(new InputSource(new StringReader(xml)));
+			Document parsedDoc = builder.parse(xmlFile);
+		
 			NodeList parameterList = parsedDoc.getElementsByTagName("FIELD");
 			NodeList eventList = parsedDoc.getElementsByTagName("TR");
 			NodeList variableList = parsedDoc.getElementsByTagName("TD");
@@ -47,6 +48,7 @@ public class Parser {
 			}
 					
 			eventArray = new String[eventList.getLength()][parameterList.getLength()];
+			System.out.println(eventList.getLength());
 			
 			int counter = 0;
 			for(int i = 0; i < eventList.getLength(); i++){
