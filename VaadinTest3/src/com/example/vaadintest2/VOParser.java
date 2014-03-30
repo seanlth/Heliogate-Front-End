@@ -9,17 +9,16 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 import java.io.File;
-
 import org.xml.sax.InputSource;
 import java.io.StringReader;
 
 
-public class Parser {
+public class VOParser {
 	
 	private String[] parameterArray;
 	private String[][] eventArray;
 	
-	public Parser(){}
+	public VOParser(){}
 	
 	public String[] getParameterArray(){
 		return parameterArray;

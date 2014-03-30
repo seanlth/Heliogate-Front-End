@@ -326,7 +326,7 @@ public class DocEditor extends CustomComponent {
 //	        xform.transform(new DOMSource(doc), new StreamResult(System.out));
 //	        
 //		} catch (Exception e) {
-//			// TODO Auto-generated catch block
+//	
 //			e.printStackTrace();
 //		}
         
@@ -469,7 +469,7 @@ public class DocEditor extends CustomComponent {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Parser parser = new Parser();
+				VOParser parser = new VOParser();
 				parser.parse(xml);
 				
 				parameters = parser.getParameterArray();
