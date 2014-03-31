@@ -13,7 +13,7 @@ public class Vaadintest2Application extends Application {
 	
 	@Override
 	public void init() {
-		
+		setTheme("bootstrapTheme");
 		buildMainLayout();
 		
 	}

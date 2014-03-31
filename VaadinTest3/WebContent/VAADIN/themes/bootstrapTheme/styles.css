@@ -1,0 +1,85 @@
+@import "../reindeer/styles.css";
+
+body{
+	background-color: white !important;
+}
+
+.v-app-Vaadintest2Application{
+	background-color: white !important;
+}
+
+.mainContentContainer{
+	background-color: whitesmoke !important;
+	border-radius: 4px 4px 4px 4px;
+	margin: 10px;
+}
+
+.pageTitle{
+	font-size: 36px;
+	color: black;
+	height: auto !important;
+	line-height: 40px !important;
+}
+
+/*remove formating*/
+.v-tabsheet-tabitemcell{
+	padding: 0 !important;
+}
+.v-tabsheet-tabitemcell{
+	background-image: none !important;
+}
+
+.v-tabsheet-spacertd{
+	background-image: none !important;
+}	
+	
+.tabsContainer div{
+	background-image: none !important;
+	
+}
+
+.v-caption{
+	background-image: none !important;
+	
+}
+
+/*now design the tabs*/
+
+
+
+.v-tabsheet-spacertd{
+	border: solid #ddd;
+	border-radius: 4px 4px 0 0;
+	border-width: 0px 0px 2px 0;
+}	
+
+.v-tabsheet-tabitem{
+	border: solid #ddd;
+	border-radius: 4px 4px 0 0;
+	border-width: 0px 0px 1px 0;
+}
+
+.v-tabsheet-tabitem:hover{
+	background-color: #ddd !important;	
+}
+
+.v-tabsheet-tabitem-selected{
+
+	border: solid #ddd;
+	border-radius: 4px 4px 0 0;
+	border-width: 1px 1px 0 1px;
+}
+	
+.v-captiontext{
+	width: 200px !important;
+	text-align: center !important;	
+}
+
+.v-tabsheet-content-tabsContainer{
+	background-color: whitesmoke !important;
+	border: 0px;
+}
+.v-tabsheet-tabsheetpanel{
+	background-color: whitesmoke !important;
+	border: 0px;
+}
