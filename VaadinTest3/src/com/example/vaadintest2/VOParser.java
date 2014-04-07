@@ -27,37 +27,6 @@ public class VOParser {
 		return eventArray;
 	}
 	
-	public String[][] getAverageOfEvents()
-	{
-		String average[][] = new String[1][this.parameterArray.length];
-		
-		for (int j = 0; j < this.parameterArray.length; j++) {
-			double averageOfParam = 0;
-			boolean ignore = false;
-			for (int i = 0; i < this.eventArray.length; i++) {
-				try {
-					averageOfParam += Double.parseDouble(eventArray[i][j]);
-				}
-				catch (Exception e) {
-					//not a value
-					ignore = true;
-					break;
-				}
-			}
-			if (ignore) {
-				average[0][j] = "";
-			}
-			else {
-				averageOfParam /= (double)eventArray.length;
-				average[0][j] = "" + averageOfParam;
-			}
-		}
-		
-		return average;
-	}
-
-	
-	
 	public void parse(String xml){
 		try{	
 			//File xmlFile = new File("/Users/seanlth/git/Heliogate-Front-End/Heliogate/VaadinTest3/sampleXML/sample.xml");

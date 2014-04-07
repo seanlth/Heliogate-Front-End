@@ -1,10 +1,13 @@
 package com.example.vaadintest2;
 
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,6 +24,7 @@ public class propagationModel {
 	
 	private String inputLine;
 	private String resultsURL;
+	private String table;
 	
 	
 	
@@ -31,8 +35,8 @@ public class propagationModel {
 		this.startSpeed = startSpeed;
 		this.speedError = speedError;
 	}
-	public String results(){
-		return resultsURL;
+	public String getTable(){
+		return table;
 	}
 		
 	public void sendParameter() throws Exception{
@@ -64,10 +68,17 @@ public class propagationModel {
 			for(Element link : links){
 				resultsURL = link.attr("abs:href");
 			}
-			
-	}
-	public void printInput(){
-		System.out.println(resultsURL);
-	}
+			resultsURL = resultsURL + "/cme_pm.votable ";
+			final URL tableURL = new URL(resultsURL);
+            URLConnection results = tableURL.openConnection();           
+		    BufferedReader in = new BufferedReader(new InputStreamReader(results.getInputStream()));		
+		    int inputChar = in.read();
+		    while (inputChar != -1) {
+		            table += (char)inputChar;
+		            inputChar = in.read();
+		    }
+		           
+		    in.close();
+			}
 }
 
