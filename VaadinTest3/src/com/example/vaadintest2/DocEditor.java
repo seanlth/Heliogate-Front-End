@@ -429,20 +429,27 @@ public class DocEditor extends CustomComponent {
 		simpleUserButton.addListener(new Button.ClickListener() {
 
 			public void buttonClick(ClickEvent event) {
-				isSimple = true; 
+				
 				UserModalityLabel.setValue("Simple User");
-				reinitialize();
+				if(isSimple == false ){ 
+					reinitialize();
+				}
+				isSimple = true; 		
 				stage2();
-				//stage3();
+				
+				
 			}
 		});
 
 		advancedUserButton.addListener(new Button.ClickListener() {
 
 			public void buttonClick(ClickEvent event) {
-				isSimple = false;
+				
 				UserModalityLabel.setValue("Advanced User");
-				reinitialize();
+				if(isSimple == true ){ 
+					reinitialize();
+				}
+				isSimple = false;
 				stage2();
 				//stage3();
 			}
