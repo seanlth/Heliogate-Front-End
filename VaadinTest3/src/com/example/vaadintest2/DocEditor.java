@@ -431,7 +431,9 @@ public class DocEditor extends CustomComponent {
 			public void buttonClick(ClickEvent event) {
 				isSimple = true; 
 				UserModalityLabel.setValue("Simple User");
+				reinitialize();
 				stage2();
+				//stage3();
 			}
 		});
 
@@ -440,7 +442,9 @@ public class DocEditor extends CustomComponent {
 			public void buttonClick(ClickEvent event) {
 				isSimple = false;
 				UserModalityLabel.setValue("Advanced User");
+				reinitialize();
 				stage2();
+				//stage3();
 			}
 		});
 
@@ -614,7 +618,55 @@ public class DocEditor extends CustomComponent {
 		return rand.nextBoolean();
 	}
 
+	private void reinitialize(){
+		
+		/*clear the date fields*/
+		top_sean_area.removeComponent(dateInputOne);
+		top_sean_area.removeComponent(dateInputTwo);
+		
+		dateInputOne = new PopupDateField();
+		dateInputOne.setEnabled(false);
+		dateInputOne.setImmediate(false);
+		dateInputOne.setWidth("-1px");
+		dateInputOne.setHeight("-1px");
+		dateInputOne.setResolution(1);
+		top_sean_area.addComponent(dateInputOne, "top:86.0px;left:20.0px;");
 
+		dateInputTwo = new PopupDateField();
+		dateInputTwo.setEnabled(false);
+		dateInputTwo.setImmediate(false);
+		dateInputTwo.setWidth("-1px");
+		dateInputTwo.setHeight("-1px");
+		dateInputTwo.setResolution(1);
+		top_sean_area.addComponent(dateInputTwo, "top:126.0px;left:20.0px;");
+		dateValidStateLabel.setValue("");		
+		
+	
+        /*re-initialize everything*/
+		
+		dateInputOne.setEnabled(false);
+		dateInputTwo.setEnabled(false);
+		setTimeButton.setEnabled(false);
+		findEventsComboBox.setEnabled(false);
+		cataloguesComboBox.setEnabled(false);   
+		workflowComboBox.setEnabled(false);
+		findEventsButton.setEnabled(false);
+		comboBox_4.setEnabled(false);
+		comboBox_5.setEnabled(false); 
+		comboBox_7.setEnabled(false);
+		comboBox_1.setEnabled(false);
+		button_5.setEnabled(false);                     
+		comboBox_8.setEnabled(false);
+		comboBox_10.setEnabled(false);                  
+		comboBox_9.setEnabled(false);
+		button_6.setEnabled(false);
+		parameterTable.setEnabled(false);
+		parameterTable.setVisible(false);	
+		setParametersButton.setEnabled(false);
+		
+		
+	}
+	
 	private void stage1(){
 
 		advancedUserButton.setEnabled(true);
@@ -900,7 +952,7 @@ public class DocEditor extends CustomComponent {
 		dateValidStateLabel.setImmediate(false);
 		dateValidStateLabel.setWidth("-1px");
 		dateValidStateLabel.setHeight("-1px");
-		dateValidStateLabel.setValue("Invalid Data");
+		dateValidStateLabel.setValue("");
 		top_sean_area.addComponent(dateValidStateLabel,
 				"top:86.0px;left:340.0px;");
 
