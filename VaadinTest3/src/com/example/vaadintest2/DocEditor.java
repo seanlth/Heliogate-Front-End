@@ -467,11 +467,12 @@ public class DocEditor extends CustomComponent {
 					date2 = (Date)dateInputTwo.getValue();
 
 					if (parseDate( date1, date2 )) {
-						dateValidStateLabel.setValue("Valid Date");    
+						//dateValidStateLabel.setValue(""+(String)date1 + " to "+(String)dateInputTwo.getValue()+" is a valid date interval.");    
+						dateValidStateLabel.setValue("Valid date");
 						stage3();
 					}
 					else {
-						dateValidStateLabel.setValue("Invalid Date");  
+						dateValidStateLabel.setValue("Invalid Date ");  
 					}
 
 				}
@@ -506,11 +507,43 @@ public class DocEditor extends CustomComponent {
 						numevents = parametersData.length;	
 					}
 					stage4();
-					//eventsLabel.setVisible(false);
+					
 					parameterTable.setEnabled(true);
 					parameterTable.setImmediate(true);
-					parameterTable.setVisible(true);
+				//	parameterTable.setVisible(true);
 					eventsLabel.setValue("Found "+numevents+" events in catalogue '"+(String)cataloguesComboBox.getValue()+"'");
+					
+                    //display table
+					double xPosition = 100.0; //start position of parameter list
+					double yPosition = 72.0; //start position of parameter list
+
+					for (int i = 0; i < parameterFields.size(); i++) {
+						middle_tom_area.removeComponent(parameterFields.get(i));
+					}
+					//parameterFields.clear();
+					
+					parameterTable.removeAllItems();
+					
+					for (int i = 0; i < parameters.length; i++) {
+						parameterTable.addContainerProperty(parameters[i], String.class, null);
+					}
+					
+					
+					
+					for (int i = 0; i < parametersData.length; i++) {
+						Object o[] = new Object[parameters.length];
+						for (int j = 0; j < parameters.length; j++) {
+							o[j] = parametersData[i][j];
+						}
+						parameterTable.addItem(i);
+						for (int j = 0; j < parameters.length; j++) {
+							parameterTable.getContainerProperty(i, parameters[j]).setValue(parametersData[i][j]);
+						}
+					}
+					parameterTable.setVisible(true);
+					parameterTable.setEditable(true);
+
+				
 				}
 				else {
 					eventsLabel.setVisible(true);
@@ -525,35 +558,6 @@ public class DocEditor extends CustomComponent {
 		//set parameters
 				setParametersButton.addListener(new Button.ClickListener() {
 					public void buttonClick(ClickEvent event) {
-
-						double xPosition = 100.0; //start position of parameter list
-						double yPosition = 72.0; //start position of parameter list
-
-						for (int i = 0; i < parameterFields.size(); i++) {
-							middle_tom_area.removeComponent(parameterFields.get(i));
-						}
-						//parameterFields.clear();
-						
-						parameterTable.removeAllItems();
-						
-						for (int i = 0; i < parameters.length; i++) {
-							parameterTable.addContainerProperty(parameters[i], String.class, null);
-						}
-						
-						
-						
-						for (int i = 0; i < parametersData.length; i++) {
-							Object o[] = new Object[parameters.length];
-							for (int j = 0; j < parameters.length; j++) {
-								o[j] = parametersData[i][j];
-							}
-							parameterTable.addItem(i);
-							for (int j = 0; j < parameters.length; j++) {
-								parameterTable.getContainerProperty(i, parameters[j]).setValue(parametersData[i][j]);
-							}
-						}
-						parameterTable.setVisible(true);
-						parameterTable.setEditable(true);
 
 //						for (int i = 0; i < parameters.length; i++) {
 //							TextField textField = new TextField();         
